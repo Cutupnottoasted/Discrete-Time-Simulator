@@ -74,13 +74,16 @@ Void arrivals: This function processes each arrival after the first. The invokin
 
 Main Function:
 Void check_earliest_event: This function is used to loop and ensure that the current event arrival time is the latest event. The function loops and checks both the Disk and the CPU until the departure times for both events are after the event’s current arrival time.
+
 Main variables:
 Mt19937_64 rng: An engine designed to create real numbers using 64 bits
-    uint64_t timeSeed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    seed_seq ss { uint32_t (timeSeed & 0xffffffff), uint32_t(timeSeed >> 32) };
-    rng.seed(ss);
 
-This is used to set a seed based on the current time.
+uint64_t timeSeed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+seed_seq ss { uint32_t (timeSeed & 0xffffffff), uint32_t(timeSeed >> 32) };
+rng.seed(ss);
+
+This above is used to set a seed based on the current time.
+
 Uniform_real_distribution<> unif(0, 1): Used to ensure an inclusive generation between 0 and 1
 
 double avg_size_cpu: Used to calculate average ready queue size 
